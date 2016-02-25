@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pitaku</title>
+</head>
+<body>
+<h1>Pitaku server</h1>
+<p><%= user %></p>
+
+<script>
+    var user = {};
+
+    <% if (user.facebook) { %>
+    user.fb = {};
+    user.fb.email = "<%= user.facebook.email %>";
+    user.fb.name = "<%= user.facebook.name %>";
+    user.fb.id = "<%= user.facebook.id %>";
+    user.fb.token = "<%= user.facebook.token %>";
+    <% } %>
+    <% if (user.google) { %>
+    user.gp = {};
+    user.gp.email = "<%= user.google.email %>";
+    user.gp.name = "<%= user.google.name %>";
+    user.gp.id = "<%= user.google.id %>";
+    user.gp.token = "<%= user.google.token %>";
+    <% } %>
+
+    sessionStorage.user = JSON.stringify(user);
+    window.location.href = "http://pitaku.com";
+</script>
+</body>
+</html>
