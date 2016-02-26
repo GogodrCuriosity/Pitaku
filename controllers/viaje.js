@@ -1,5 +1,5 @@
 var Viaje = require('../models/viaje');
-exports.create = function(req,res){
+exports.crearViaje = function(req,res){
     var vueloSalida = req.body.vueloSalida;
     var vueloRegreso = req.body.vueloRegreso;
     var viaje = new Viaje();
@@ -13,7 +13,7 @@ exports.create = function(req,res){
         }
     });
 };
-exports.update = function (req, res) {
+exports.editarViaje = function (req, res) {
     var id = req.body.id;
     var vueloSalida = req.body.vueloSalida;
     var vueloRegreso = req.body.vueloRegreso;
@@ -39,7 +39,7 @@ exports.update = function (req, res) {
         }
     });
 };
-exports.get = function(req,res){
+exports.getById = function(req,res){
     var id = req.params.id;
     Viaje.findOne({ id: id }, function (err, viaje){
         if(err){
@@ -53,7 +53,17 @@ exports.get = function(req,res){
         }
     });
 };
-exports.destroy = function (req, res) {
+exports.getByUser = function(req,res){
+    var user = req.body.userId;
+    Viaje.find({ user: user }).exec(function (err, viajes) {
+        if (err) {
+            res.json({status: "fail", data: err});
+        } else {
+            res.json({status: "ok", data: viajes});
+        }
+    });
+};
+exports.destruirViaje = function (req, res) {
     var id = req.body.id;
     Viaje.findOne({ id: id }, function (err, viaje){
         if(err){
