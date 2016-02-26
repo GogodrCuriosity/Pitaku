@@ -6,14 +6,12 @@ var passport = require('passport');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 
-
-
 //CONFIG
 require('./config/passport')(passport);
 mongoose.connect('mongodb://localhost/pitaku');
 
-app.set('views', 'views'); // specify the views directory
-app.set('view engine', 'ejs'); // register the template engine
+app.set('views', 'views');
+app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -24,21 +22,13 @@ app.use(session({secret: 'pitaku',
     resave: true}));
 
 app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
+app.use(passport.session());
 
-//CONTROLLERS
+//API
 var Orden = require('./controllers/orden');
 var Pedido = require('./controllers/pedido');
 var Usuario = require('./controllers/usuario');
 var Viaje = require('./controllers/viaje');
-
-
-
-
-
-
-
-//API
 
 //Usuario
 app.get('/api/usuario',Usuario.getById);
@@ -60,16 +50,10 @@ app.del('/api/orden',Orden.destruirOrden);
 
 //Viaje
 app.get('/api/viaje',Viaje.getById);
-app.get('/api/vioaje/getByUser',Viaje.getByUser);
+app.get('/api/viaje/getByUser',Viaje.getByUser);
 app.post('/api/viaje',Viaje.crearViaje);
 app.put('/api/viaje',Viaje.editarViaje);
 app.del('/api/viaje',Viaje.destruirViaje);
-
-
-
-
-
-
 
 //Passport Auth
 app.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email','public_profile']}));
