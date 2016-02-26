@@ -63,21 +63,54 @@ exports.crearOrden = function(req,res){
         }
     });
 };
-exports.editarOrden = function(req,res){
+exports.destruirOrden = function(req,res){
+    var ordenId = req.body.ordenId;
+    Orden.findOne({id:ordenId},function(err,orden){
+        if(err){
+            res.json({status:"fail",data:err});
+        }else{
+            Pedido.findOne({ id: orden.pedido }, function (err, pedido){
+                if(err){
+                    res.json({status:"fail",data:err});
+                }else{
+                    if(pedido){
+                        pedido.propuestas.splice(pedido.propuestas.indexOf(orden.id),1);
+                        pedido.save(function (err, pedido) {
+                            if (err){
+                                res.json({status:"fail",data:err});
+                            }else{
+                                orden.remove(function (err, orden) {
+                                    if (err){
+                                        res.json({status:"fail",data:err});
+                                    }else{
+                                        res.json({status:"ok",data:orden});
+                                    }
+                                });
+                            }
+                        });
+                    }else{
+                        res.json({status:"fail",data:'Pedido no encontrado'});
+                    }
+                }
+            });
+        }
+    });
+};
+exports.editarOrden = function (req, res) {
     var ordenId = req.body.ordenId;
     var precio = req.body.precio;
     Orden.findOne({id:ordenId},function(err,orden){
-       if(err){
-           res.json({status:"fail",data:err});
-       }else{
-           orden.precio = precio;
-           orden.save(function(err,orden){
-               if(err){
-                   res.json({status:"fail",data:err});
-               }else{
-                   res.json({status:"ok",data:orden});
-               }
-           })
-       }
+        if(err){
+            res.json({status:"fail",data:err});
+        }else{
+            orden.precio = precio;
+            orden.save(function(err,orden){
+                if(err){
+                    res.json({status:"fail",data:err});
+                }else{
+                    res.json({status:"ok",data:orden});
+                }
+            })
+        }
     });
 };

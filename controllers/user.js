@@ -1,5 +1,5 @@
 var User = require('../models/user');
-exports.update = function (req, res) {
+exports.updateUsuario = function (req, res) {
     var id = req.body.id;
     var nombre = req.body.nombre;
     var apellido = req.body.apellido;
@@ -44,7 +44,7 @@ exports.update = function (req, res) {
         }
     });
 };
-exports.get = function(req,res){
+exports.getById = function(req,res){
     var id = req.params.id;
     User.findOne({ id: id }, function (err, usuario){
         if(err){
@@ -58,7 +58,7 @@ exports.get = function(req,res){
         }
     });
 };
-exports.destroy = function (req, res) {
+exports.destruirUsuario = function (req, res) {
     var id = req.body.id;
     User.findOne({ id: id }, function (err, usuario){
         if(err){
