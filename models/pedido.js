@@ -7,9 +7,9 @@ var requestSchema = mongoose.Schema({
     descripcion:String,
     url:String,
     estado:Number,
-    orden:ObjectId,
-    propuestas:[ObjectId],
-    usuario:ObjectId
+    orden:mongoose.Schema.Types.ObjectId,
+    propuestas:[mongoose.Schema.Types.ObjectId],
+    usuario:mongoose.Schema.Types.ObjectId
 });
 
 module.exports = mongoose.model('Pedido', requestSchema);

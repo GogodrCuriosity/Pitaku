@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var orderSchema = mongoose.Schema({
-    viaje:ObjectId,
-    pedido:ObjectId,
+    viaje:mongoose.Schema.Types.ObjectId,
+    pedido:mongoose.Schema.Types.ObjectId,
     precio:Number,
     estado:Boolean
 });

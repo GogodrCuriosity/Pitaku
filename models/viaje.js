@@ -3,8 +3,8 @@
  */
 var mongoose = require('mongoose');
 var viajeSchema = mongoose.Schema({
-    usuario:ObjectId,
-    ordenes:[ObjectId],
+    usuario:mongoose.Schema.Types.ObjectId,
+    ordenes:[mongoose.Schema.Types.ObjectId],
     vueloSalida:{
         ciudad:String,
         pais:String,

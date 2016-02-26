@@ -27,13 +27,13 @@ app.use(passport.session());
 //API
 var Orden = require('./controllers/orden');
 var Pedido = require('./controllers/pedido');
-var Usuario = require('./controllers/usuario');
+var Usuario = require('./controllers/user');
 var Viaje = require('./controllers/viaje');
 
 //Usuario
 app.get('/api/usuario',Usuario.getById);
 app.put('/api/usuario',Usuario.updateUsuario);
-app.del('/api/usuario',Usuario.destruirUsuario);
+app.delete('/api/usuario',Usuario.destruirUsuario);
 
 //Pedido
 app.get('/api/pedido/getByUser',Pedido.getByUser);
@@ -46,14 +46,14 @@ app.get('/api/orden/getByViaje',Orden.getByViaje);
 app.get('/api/orden/getByPedido',Orden.getByPedido);
 app.post('/api/orden',Orden.crearOrden);
 app.put('/api/orden',Orden.editarOrden);
-app.del('/api/orden',Orden.destruirOrden);
+app.delete('/api/orden',Orden.destruirOrden);
 
 //Viaje
 app.get('/api/viaje',Viaje.getById);
 app.get('/api/viaje/getByUser',Viaje.getByUser);
 app.post('/api/viaje',Viaje.crearViaje);
 app.put('/api/viaje',Viaje.editarViaje);
-app.del('/api/viaje',Viaje.destruirViaje);
+app.delete('/api/viaje',Viaje.destruirViaje);
 
 //Passport Auth
 app.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email','public_profile']}));

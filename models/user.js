@@ -22,8 +22,8 @@ var userSchema = mongoose.Schema({
         token: String,
         email: String
     },
-    viajes:[ObjectId],
-    pedidos:[ObjectId]
+    viajes:[mongoose.Schema.Types.ObjectId],
+    pedidos:[mongoose.Schema.Types.ObjectId]
 
 
 });
